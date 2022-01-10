@@ -8,7 +8,7 @@ white=$'\e[0m'
 
 # Script Goes Here....
 echo $'\n'
-echo $white"What do you like ? [pull/push/prod]"$white
+echo $white"What do you like ? [new/pull/push/prod]"$white
 read INPUT
 
 if [[ $INPUT == "pull" || $INPUT == "Pull" || $INPUT == "PULL" ]]; 
@@ -18,6 +18,24 @@ then
 
     echo $'\n'
     echo $green"# Pull origin main success."$green
+
+elif [[ $INPUT == "new" || $INPUT == "New" || $INPUT == "NEW" ]]; 
+then
+
+    echo $'\n'
+    echo $white"# Please provide the git repo url. "$white
+
+    read REPO_URL
+
+    git init
+    git add --all
+    git commit -m "initial commit"
+    git branch -M main
+    git remote add origin ${REPO_URL}
+    git push -u origin main
+
+    echo $'\n'
+    echo $green"# Successfully pushed to the main branch. "$green
 
 elif [[ $INPUT == "push" || $INPUT == "Push" || $INPUT == "PUSH" ]]; 
 then
@@ -87,5 +105,5 @@ then
 
 else
      echo $'\n'
-     echo $white"You entered an invalid input. $INPUT" $white
+     echo $white"You have entered an invalid input. $INPUT" $white
 fi
